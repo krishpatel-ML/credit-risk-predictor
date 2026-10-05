@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Credit Risk Predictor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="story">
+      <p class="brand"><span class="dot"></span>RiskLens</p>
+      <h1>Know the odds of default before the loan is approved.</h1>
+      <p class="lead">Enter an applicant's details and a calibrated XGBoost model returns a default probability and a clear risk decision in under a second.</p>
+      <ul class="facts">
+        <li><strong>Calibrated probabilities</strong>Scores you can read as real percentages, not raw model output.</li>
+        <li><strong>Tuned decision threshold</strong>The Low or High Risk cut-off is chosen from the precision-recall curve.</li>
+        <li><strong>Served with FastAPI</strong>The same model runs behind a documented REST endpoint.</li>
+      </ul>
+      <div class="stack"><span>Python</span><span>XGBoost</span><span>scikit-learn</span><span>FastAPI</span></div>
+      <p class="links"><a href="https://github.com/krishpatel-ML/credit-risk-predictor" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/krish-patel-102024374?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_android" target="_blank" rel="noopener">LinkedIn</a></p>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Loan application</h2>
+        <div class="samples">
+          <button type="button" data-sample="low">Fill low-risk example</button>
+          <button type="button" data-sample="high">Fill high-risk example</button>
+        </div>
+      </div>
+
+      <form id="form" novalidate>
+        <label>Age<input type="number" id="person_age" min="18" max="100" required></label>
+        <label>Annual income<input type="number" id="person_income" min="1" required></label>
+        <label>Home ownership
+          <select id="person_home_ownership"><option>RENT</option><option>OWN</option><option>MORTGAGE</option><option>OTHER</option></select>
+        </label>
+        <label>Years employed<input type="number" id="person_emp_length" min="0" step="0.5" required></label>
+        <label>Loan purpose
+          <select id="loan_intent"><option>EDUCATION</option><option>MEDICAL</option><option>VENTURE</option><option>PERSONAL</option><option>DEBTCONSOLIDATION</option><option>HOMEIMPROVEMENT</option></select>
+        </label>
+        <label>Loan grade
+          <select id="loan_grade"><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option></select>
+        </label>
+        <label>Loan amount<input type="number" id="loan_amnt" min="1" required></label>
+        <label>Interest rate (%)<input type="number" id="loan_int_rate" min="0" step="0.1" required></label>
+        <label>Loan as share of income<input type="text" id="loan_percent_income" readonly placeholder="Calculated for you"></label>
+        <label>Previous default on file
+          <select id="cb_person_default_on_file"><option value="N">No</option><option value="Y">Yes</option></select>
+        </label>
+        <label class="wide">Credit history (years)<input type="number" id="cb_person_cred_hist_length" min="0" required></label>
+        <button class="submit" type="submit" id="submit">Check risk</button>
+      </form>
+
+      <div id="result" class="result" hidden aria-live="polite">
+        <div class="gauge">
+          <svg viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="track" cx="60" cy="60" r="52"/>
+            <circle class="arc" id="arc" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="gauge-text"><span id="pct">0%</span><small>chance of default</small></div>
+        </div>
+        <div class="verdict">
+          <span class="badge" id="badge"></span>
+          <p id="note"></p>
+        </div>
+      </div>
+      <p id="error" class="error" hidden role="alert"></p>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
