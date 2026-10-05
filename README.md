@@ -129,10 +129,12 @@ Model results (replace with the values from your notebook):
 
 | Metric | Value |
 |---|---|
-| ROC-AUC | _add value_ |
-| Precision | _add value_ |
-| Recall | _add value_ |
-| F1 | _add value_ |
+| Accuracy | 0.92 |
+| Precision | 0.82 |
+| Recall | 0.81 |
+| F1-Score | 0.82 |
+| ROC-AUC | 0.87 |
+| PR-AUC | ~0.90 |
 
 ## Troubleshooting
 
