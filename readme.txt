@@ -2,6 +2,9 @@
 
 A full-stack machine learning app that estimates the probability a loan applicant will default. A calibrated XGBoost model is served through a FastAPI backend and used by a clean web front-end.
 
+<!-- Add a screenshot after saving it in the repo, e.g. screenshot.png -->
+<!-- ![App screenshot](screenshot.png) -->
+
 ## Features
 
 - Calibrated default probability, so scores can be read as real percentages
@@ -18,15 +21,22 @@ A full-stack machine learning app that estimates the probability a loan applican
 | Backend | FastAPI, Uvicorn, Pydantic, joblib |
 | Frontend | HTML, CSS, JavaScript (no framework) |
 
+## Dataset
+
+Credit Risk Dataset (Kaggle), included as `credit_risk_dataset.csv`. The target is whether the applicant defaulted on the loan.
+
 ## Project structure
 
 ```
 credit_loan_prediction/
-├── main.py                  # FastAPI app, serves the API and the front-end
+├── main.py                            # FastAPI app, serves the API and the front-end
 ├── requirements.txt
-├── credit_risk_model.pkl    # trained, calibrated model
-├── best_threshold.pkl       # tuned decision threshold
-├── Credit_Risk.ipynb        # data analysis, training and evaluation
+├── credit_risk_dataset.csv            # dataset
+├── credit_risk_model.pkl              # trained, calibrated model
+├── best_threshold.pkl                 # tuned decision threshold
+├── credit_loan_classification.ipynb   # data analysis, training and evaluation
+├── .gitignore
+├── README.md
 └── static/
     ├── index.html
     ├── style.css
@@ -35,7 +45,14 @@ credit_loan_prediction/
 
 ## Getting started
 
-**1. Create and activate a virtual environment**
+**1. Clone the repository**
+
+```bash
+git clone https://github.com/krishpatel-ML/<repo-name>.git
+cd <repo-name>
+```
+
+**2. Create and activate a virtual environment**
 
 ```bash
 python -m venv .venv
@@ -45,13 +62,13 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
-**2. Install dependencies**
+**3. Install dependencies**
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-**3. Run the app**
+**4. Run the app**
 
 ```bash
 uvicorn main:app --reload
@@ -108,7 +125,7 @@ Allowed values for the text fields:
 3. Probabilities are calibrated with sigmoid calibration (`CalibratedClassifierCV`).
 4. The decision threshold is chosen on the precision-recall curve to maximize F1, using the calibrated model's probabilities.
 
-Model results (fill in from your notebook):
+Model results (replace with the values from your notebook):
 
 | Metric | Value |
 |---|---|
